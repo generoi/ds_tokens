@@ -1,0 +1,6 @@
+name = Display Suite Tokens
+description = Provide additional tokens integration for Display Suite
+dependencies[] = ds
+dependencies[] = token
+package = custom
+core = 7.x

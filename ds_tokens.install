@@ -1,0 +1,13 @@
+<?php
+
+/**
+ * Implements hook_install().
+ */
+function ds_tokens_install() {
+  db_update('system')
+    // ds used 1, we want our functions to run after ds so that we can override 
+    // them.
+    ->fields(array('weight' => 2))
+    ->condition('name', 'ds_tokens')
+    ->execute();
+}
