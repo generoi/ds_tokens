@@ -53,9 +53,17 @@ function ds_tokens_theme_registry_alter(&$theme_registry) {
  * Tokenize the altered data.
  */
 function ds_tokens_token_variables(&$variables) {
-  if (isset($variables['layout_attributes'])) {
+  if (!empty($variables['layout_attributes'])) {
     $entity_type = $variables['elements']['#entity_type'];
-    $variables['layout_attributes'] = token_replace($variables['layout_attributes'], array($entity_type => $variables[$entity_type]));
+    switch ($entity_type) {
+      case 'taxonomy_term':
+        $entity = $variables['term'];
+        break;
+      default:
+        $entity = $variables[$entity_type];
+
+    }
+    $variables['layout_attributes'] = token_replace($variables['layout_attributes'], array($entity_type => $entity));
   }
 }
 
